@@ -1,5 +1,6 @@
 import { Car, Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import { Link } from "wouter";
+import { CONTACT_INFO, CONTACT_LINKS } from "@shared/contact";
 
 export default function Footer() {
   return (
@@ -74,15 +75,19 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2.5 text-sm text-background/70">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary shrink-0" />
-                123 Auto Drive, Motor City, MC 45678
+                {CONTACT_INFO.address}
               </li>
               <li className="flex items-center gap-2.5 text-sm text-background/70">
                 <Phone className="w-4 h-4 text-primary shrink-0" />
-                +1 (555) 123-4567
+                <a href={CONTACT_LINKS.phone} className="hover:text-primary transition-colors">
+                  {CONTACT_INFO.phone}
+                </a>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-background/70">
                 <Mail className="w-4 h-4 text-primary shrink-0" />
-                info@automart.com
+                <a href={CONTACT_LINKS.email} className="hover:text-primary transition-colors">
+                  {CONTACT_INFO.email}
+                </a>
               </li>
             </ul>
           </div>

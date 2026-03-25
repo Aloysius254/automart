@@ -159,7 +159,7 @@ export default function Checkout() {
                       id="phone"
                       value={form.customerPhone}
                       onChange={(e) => setForm((p) => ({ ...p, customerPhone: e.target.value }))}
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="0714782090"
                     />
                   </div>
                 </div>

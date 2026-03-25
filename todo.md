@@ -49,3 +49,19 @@
 - [x] Write vitest tests for key procedures (20 tests passing)
 - [x] Responsive design verification
 - [x] Final UI polish and review
+
+
+## Contact Information Update
+- [x] Create contact constants file (shared/contact.ts)
+- [x] Update Footer with new phone and email
+- [x] Update Checkout page with new phone placeholder
+- [x] Make phone and email clickable links
+
+## Stripe Payment Integration
+- [ ] Add Stripe feature to project scaffold
+- [ ] Configure Stripe API keys (public and secret)
+- [ ] Create payment intent backend endpoint
+- [ ] Update checkout page with Stripe payment form
+- [ ] Handle payment success and order completion
+- [ ] Handle payment failure and error messages
+- [ ] Write Stripe integration tests

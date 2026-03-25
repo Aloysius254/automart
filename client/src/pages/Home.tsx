@@ -19,6 +19,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { CONTACT_INFO, CONTACT_LINKS } from "@shared/contact";
 
 const PART_CATEGORIES = [
   { key: "engine", label: "Engine", icon: "⚙️" },
