@@ -9,6 +9,7 @@ import { useMemo, useState } from "react";
 import { Link, useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 const CATEGORIES = [
   { key: "engine", label: "Engine", icon: "⚙️" },
@@ -28,11 +29,8 @@ const CATEGORIES = [
   { key: "other", label: "Other", icon: "📦" },
 ];
 
-function formatPrice(price: string | number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(Number(price));
-}
-
 export default function Parts() {
+  const { formatPrice } = useCurrency();
   const [location] = useLocation();
   const params = useMemo(() => new URLSearchParams(location.includes("?") ? location.split("?")[1] : ""), [location]);
 

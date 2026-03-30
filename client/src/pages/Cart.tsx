@@ -9,12 +9,10 @@ import { Link } from "wouter";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-function formatPrice(price: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price);
-}
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 export default function Cart() {
+  const { formatPrice } = useCurrency();
   const { isAuthenticated } = useAuth();
   const utils = trpc.useUtils();
 

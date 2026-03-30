@@ -24,9 +24,11 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
+  const { currency, toggleCurrency } = useCurrency();
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -74,6 +76,15 @@ export default function Navbar() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-2">
+            {/* Currency Toggle */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleCurrency}
+              className="hidden md:flex text-xs font-medium px-3 py-1.5 rounded-lg border border-border hover:bg-muted"
+            >
+              {currency}
+            </Button>
             {/* Cart */}
             {isAuthenticated && (
               <Link href="/cart">
@@ -136,6 +147,16 @@ export default function Navbar() {
                 Sign In
               </Button>
             )}
+
+            {/* Currency Toggle Mobile */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleCurrency}
+              className="md:hidden text-xs font-medium px-2 py-1 rounded-lg border border-border hover:bg-muted"
+            >
+              {currency}
+            </Button>
 
             {/* Mobile Menu Toggle */}
             <Button

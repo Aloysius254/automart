@@ -10,10 +10,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-function formatPrice(price: string | number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(Number(price));
-}
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 function formatDate(date: Date | string) {
   return new Date(date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
@@ -29,7 +26,7 @@ const STATUS_COLORS: Record<string, string> = {
   refunded: "bg-gray-100 text-gray-700",
 };
 
-function OrderDetail({ orderId, onBack }: { orderId: number; onBack: () => void }) {
+function OrderDetail({ orderId, onBack, formatPrice }: { orderId: number; onBack: () => void; formatPrice: (price: number | string) => string }) {
   const orderQuery = trpc.orders.detail.useQuery({ id: orderId });
   const order = orderQuery.data;
 
@@ -131,6 +128,7 @@ function OrderDetail({ orderId, onBack }: { orderId: number; onBack: () => void 
 }
 
 export default function Orders() {
+  const { formatPrice } = useCurrency();
   const { isAuthenticated } = useAuth();
   const [selectedOrderId, setSelectedOrderId] = useState<number | null>(null);
 
@@ -163,7 +161,7 @@ export default function Orders() {
 
       <div className="container py-8 flex-1">
         {selectedOrderId ? (
-          <OrderDetail orderId={selectedOrderId} onBack={() => setSelectedOrderId(null)} />
+          <OrderDetail orderId={selectedOrderId} onBack={() => setSelectedOrderId(null)} formatPrice={formatPrice} />
         ) : ordersQuery.isLoading ? (
           <div className="space-y-3">
             {Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-24 rounded-xl" />)}

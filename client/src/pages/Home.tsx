@@ -20,6 +20,7 @@ import { Link, useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CONTACT_INFO, CONTACT_LINKS } from "@shared/contact";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 const PART_CATEGORIES = [
   { key: "engine", label: "Engine", icon: "⚙️" },
@@ -39,11 +40,7 @@ const FEATURES = [
   { icon: Zap, title: "Easy Returns", desc: "Hassle-free 30-day return policy on all spare parts." },
 ];
 
-function formatPrice(price: string | number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(Number(price));
-}
-
-function CarCard({ car }: { car: any }) {
+function CarCard({ car, formatPrice }: { car: any; formatPrice: (price: number | string) => string }) {
   const primaryImage = car.images?.find((i: any) => i.isPrimary) ?? car.images?.[0];
   return (
     <Link href={`/cars/${car.id}`}>
@@ -85,6 +82,7 @@ function CarCard({ car }: { car: any }) {
 }
 
 export default function Home() {
+  const { formatPrice } = useCurrency();
   const [searchQuery, setSearchQuery] = useState("");
   const [, navigate] = useLocation();
 
@@ -208,7 +206,7 @@ export default function Home() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredCars.data?.map((car) => <CarCard key={car.id} car={car} />)}
+              {featuredCars.data?.map((car) => <CarCard key={car.id} car={car} formatPrice={formatPrice} />)}
             </div>
           )}
 

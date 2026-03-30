@@ -13,12 +13,10 @@ import { Link, useLocation } from "wouter";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-function formatPrice(price: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price);
-}
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 export default function Checkout() {
+  const { formatPrice } = useCurrency();
   const { isAuthenticated, user } = useAuth();
   const [, navigate] = useLocation();
   const [orderPlaced, setOrderPlaced] = useState(false);

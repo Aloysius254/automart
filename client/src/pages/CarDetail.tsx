@@ -24,14 +24,12 @@ import { Link, useParams } from "wouter";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-function formatPrice(price: string | number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(Number(price));
-}
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 export default function CarDetail() {
   const { id } = useParams<{ id: string }>();
   const { isAuthenticated } = useAuth();
+  const { formatPrice } = useCurrency();
   const [activeImg, setActiveImg] = useState(0);
 
   const carQuery = trpc.cars.detail.useQuery({ id: Number(id) });

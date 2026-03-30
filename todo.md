@@ -71,3 +71,10 @@
 - [x] Add floating button UI with animation
 - [x] Integrate into App.tsx layout
 - [x] Test WhatsApp link functionality
+
+## Dual Currency Support (KES & USD)
+- [x] Create currency context and utilities
+- [x] Add currency toggle to Navbar
+- [x] Update price formatting functions
+- [x] Update all price displays across pages
+- [x] Store currency preference in localStorage

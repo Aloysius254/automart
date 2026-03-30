@@ -29,10 +29,7 @@ import { Link } from "wouter";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-function formatPrice(price: string | number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(Number(price));
-}
+import { useCurrency } from "@/contexts/CurrencyContext";
 function formatDate(date: Date | string) {
   return new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
@@ -240,8 +237,9 @@ function PartForm({ part, onSuccess }: { part?: any; onSuccess: () => void }) {
   );
 }
 
-// ─── Main Admin Component ─────────────────────────────────────────────────────
+// ─── Main Admin Component ──────────────────────────────────────────────────
 export default function Admin() {
+  const { formatPrice } = useCurrency();
   const { user, isAuthenticated } = useAuth();
   const [activeTab, setActiveTab] = useState<AdminTab>("overview");
   const [carDialogOpen, setCarDialogOpen] = useState(false);

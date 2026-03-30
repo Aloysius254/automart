@@ -11,10 +11,7 @@ import { Link, useParams } from "wouter";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-function formatPrice(price: string | number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(Number(price));
-}
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 const CATEGORY_ICONS: Record<string, string> = {
   engine: "⚙️", brakes: "🛑", suspension: "🔧", electrical: "⚡", body: "🚗",
@@ -25,6 +22,7 @@ const CATEGORY_ICONS: Record<string, string> = {
 export default function PartDetail() {
   const { id } = useParams<{ id: string }>();
   const { isAuthenticated } = useAuth();
+  const { formatPrice } = useCurrency();
   const [activeImg, setActiveImg] = useState(0);
   const [quantity, setQuantity] = useState(1);
 

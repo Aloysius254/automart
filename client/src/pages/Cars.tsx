@@ -10,10 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-function formatPrice(price: string | number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(Number(price));
-}
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 const BODY_TYPES = ["sedan", "suv", "hatchback", "coupe", "truck", "van", "convertible", "wagon"];
 const FUEL_TYPES = ["petrol", "diesel", "electric", "hybrid"];
@@ -21,6 +18,7 @@ const TRANSMISSIONS = ["automatic", "manual", "cvt"];
 const CONDITIONS = ["new", "used", "certified"];
 
 export default function Cars() {
+  const { formatPrice } = useCurrency();
   const [location] = useLocation();
   const params = useMemo(() => new URLSearchParams(location.includes("?") ? location.split("?")[1] : ""), [location]);
 
